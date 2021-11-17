@@ -1,0 +1,24 @@
+#------------------------------------------------------------------------------
+# docker-compose.xr.yml - Example XR compose topology for XR Docker.
+# Used as input for scripts/xr-compose
+#
+# Copyright (c) 2020-2021 by Cisco Systems, Inc.
+# All rights reserved.
+#------------------------------------------------------------------------------
+
+# Author: sarimits
+
+services:
+  xrd-test:
+    xr_startup_cfg: xrd-test_xrconf.cfg
+    xr_interfaces:
+      - Gi0/0/0/0
+      - Gi0/0/0/1
+      - Mg0/RP0/CPU0/0
+networks:
+  mgmt:
+    xr_interfaces:
+      - xrd-test:Mg0/RP0/CPU0/0
+    ipam:
+      config:
+        - subnet: 172.40.0.0/24
